@@ -14,6 +14,9 @@ class DataModel(models.Model):
     contact = models.CharField(max_length=200, null=True) # CONTACT_POINT 전화번호
     audience = models.CharField(max_length=200, null=True) # AUDIENCE 전체관람
 
+    def scrap_count(self):
+        return self.scrap_set.count()
+
 
 # 전시 스크랩 기능
 User = get_user_model()

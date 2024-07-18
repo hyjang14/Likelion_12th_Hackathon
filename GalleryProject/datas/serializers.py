@@ -5,7 +5,11 @@ from .models import DataModel, Scrap
 class DataSerializer(serializers.ModelSerializer):
         class Meta:
             model = DataModel
-            fields = ['id', 'title', 'description', 'image', 'pageUrl', 'author', 'period', 'time', 'place', 'contact', 'audience']
+            fields = ['id', 'title', 'description', 'image', 'pageUrl', 'author', 'period', 'time', 'place', 'contact', 'audience', 'scrap_count']
+
+
+        def get_scrap_count(self, obj):
+            return obj.scrap_count()
 
 # 스크랩
 class ScrapSerializer(serializers.ModelSerializer):
