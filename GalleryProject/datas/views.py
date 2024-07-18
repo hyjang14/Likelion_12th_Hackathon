@@ -101,9 +101,7 @@ class ScrapCreateView(generics.CreateAPIView):
     serializer_class = ScrapSerializer
 
     def perform_create(self, serializer):
-        exhibition_id = self.kwargs.get('exhibition_id')
-        # 현재 요청한 유저를 댓글 작성자로 저장
-        serializer.save(user=self.request.user, data=exhibition_id)
+        serializer.save(user=self.request.user)
 
 
 # 스크랩 전체조회
