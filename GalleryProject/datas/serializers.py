@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import DataModel, Scrap
+from .models import DataModel, Scrap, Comment
 
 # openApi
 class DataSerializer(serializers.ModelSerializer):
@@ -16,3 +16,10 @@ class ScrapSerializer(serializers.ModelSerializer):
     class Meta:
         model = Scrap
         fields = ['id', 'user', 'data', 'created_at']
+
+# 댓글
+class CommentSerializer(serializers.ModelSerializer):
+    data = serializers.PrimaryKeyRelatedField(queryset=DataModel.objects.all())
+    class Meta:
+        model = Comment
+        fields = ['id', 'user', 'data', 'comment', 'created_at']
