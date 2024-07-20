@@ -1,8 +1,12 @@
-from .models import Post, Analysis
-from .serializers import PostSerializer, AnalysisSerializer
+from .models import Post, Analysis, Like
+from .serializers import PostSerializer, AnalysisSerializer, LikeSerializer
 from rest_framework.viewsets import ModelViewSet 
 from rest_framework.generics import ListAPIView
 import re
+
+# 좋아요
+from rest_framework import generics
+from django.http import Http404
 
 # AI
 from rest_framework.views import APIView
@@ -17,6 +21,51 @@ class PostViewSet(ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(writer = self.request.user)
+
+
+
+# 좋아요 생성
+class LikeCreateView(generics.CreateAPIView):
+    queryset = Like.objects.all()
+    serializer_class = LikeSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+# 좋아요 전체조회
+class LikeView(generics.ListAPIView):
+    queryset = Like.objects.all()
+    serializer_class = LikeSerializer
+
+# 특정 기록 좋아요 조회
+class PostLikeListView(generics.ListAPIView):
+    serializer_class = LikeSerializer
+
+    def get_queryset(self):
+        post_id = self.kwargs['post_id']
+        return Like.objects.filter(post=post_id)  # 전시회 ID에 해당하는 스크랩
+    
+
+# 좋아요 삭제
+class LikeDeleteView(generics.DestroyAPIView):
+    queryset = Like.objects.all()
+    serializer_class = LikeSerializer
+
+    def get_object(self):
+        post_id = self.kwargs['post_id']
+        try:
+            # post_id와 매칭되는 Like 객체를 가져옵니다.
+            obj = self.queryset.get(post_id=post_id, user=self.request.user)
+            self.check_object_permissions(self.request, obj)  # 객체 권한 검사
+            return obj
+        except Like.DoesNotExist:
+            raise Http404
+
+    def delete(self, request, *args, **kwargs):
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
 
 class AnalysisListView(ListAPIView):
     queryset = Analysis.objects.all()
@@ -35,7 +84,7 @@ class AnalyzePostView(APIView):
         model = "gpt-3.5-turbo" 
         
         # 프롬프트 
-        query = "이 글을 심리 분석하고 행복, 슬픔, 분노, 불안의 퍼센트를 도출해주세요. 각 퍼센트는 합해서 100%가 되어야 합니다." 
+        query = "이 글을 심리 분석하고 행복, 슬픔, 분노, 불안의 퍼센트를 도출해주세요. 각 퍼센트는 합해서 100%가 되어야 합니다. 감정 퍼센트를 마지막에 정리해서 알려주세요." 
         
         # 메시지 설정하기
         messages = [ {"role": "system", "content": "You are a helpful assistant"}, {"role": "user", "content": post.content}, {"role": "user", "content": query} ] 
