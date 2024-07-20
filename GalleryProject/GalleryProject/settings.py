@@ -11,6 +11,15 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv # .env
+import os
+
+# .env 파일 경로
+env_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env')
+load_dotenv(dotenv_path=env_path)
+
+# 환경 변수 가져오기
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -59,7 +68,10 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # apps
-    'accounts', 'datas'
+    'accounts', 'datas', 'posts', 'infos',
+
+    # cors 에러
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +85,23 @@ MIDDLEWARE = [
 
     # drf 인증 패키지 추가
     'allauth.account.middleware.AccountMiddleware', 
+
+    # cors 에러
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+]
+
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+)
+CORS_ALLOW_METHODS = [
+	'DELETE',
+	'GET',
+	'OPTIONS',
+	'PATCH',
+	'POST',
+	'PUT',
 ]
 
 # drf 인증 패키지 추가
@@ -84,6 +113,22 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
+    # django_filters
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+    ],
+
+    # CamelCaseJSON 관련 설정
+	'DEFAULT_RENDERER_CLASSES': (
+	'djangorestframework_camel_case.render.CamelCaseJSONRenderer', 
+	'djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer',
+	),
+	'DEFAULT_PARSER_CLASSES': (
+	'djangorestframework_camel_case.parser.CamelCaseFormParser', 
+	'djangorestframework_camel_case.parser.CamelCaseMultiPartParser',
+	'djangorestframework_camel_case.parser.CamelCaseJSONParser',
+	),
 }
 
 ROOT_URLCONF = 'GalleryProject.urls'
