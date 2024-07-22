@@ -13,6 +13,9 @@ class DataSerializer(serializers.ModelSerializer):
 
 # 스크랩
 class ScrapSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
+    data = serializers.PrimaryKeyRelatedField(read_only=True)
+    
     class Meta:
         model = Scrap
         fields = ['id', 'user', 'data', 'created_at']
@@ -24,6 +27,7 @@ class CommentSerializer(serializers.ModelSerializer):
     username = serializers.CharField(read_only=True)
     profile = serializers.URLField(read_only=True)
     user = serializers.PrimaryKeyRelatedField(read_only=True)
+    data = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Comment
