@@ -103,7 +103,7 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         return value
     
     def update(self, instance, validated_data):
-        instance.profile = validated_data.get('username', instance.profile)
+        instance.profile = validated_data.get('profile', instance.profile)
         instance.nickname = validated_data.get('nickname', instance.nickname)
         instance.phone = validated_data.get('phone', instance.phone)
         instance.save()
