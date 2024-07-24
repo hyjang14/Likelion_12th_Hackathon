@@ -46,6 +46,7 @@ class CustomLoginSerializer(LoginSerializer):
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
     password_confirm = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
+    profile = serializers.ImageField(required=False)
     
     class Meta:
         model = User
@@ -73,7 +74,7 @@ class UserSerializer(serializers.ModelSerializer):
         return data
 
     def create(self, validated_data):
-
+        profile = validated_data.pop('profile', 'accounts_photo/default_profile.png')
         user = User.objects.create_user(
             username=validated_data['username'],
             password=validated_data['password'],
@@ -84,6 +85,10 @@ class UserSerializer(serializers.ModelSerializer):
             phone=validated_data.get('phone', ''),
             profile=validated_data.get('profile', None)
         )
+        if profile:
+            user.profile = profile
+            user.save()
+
         return user
 
 
