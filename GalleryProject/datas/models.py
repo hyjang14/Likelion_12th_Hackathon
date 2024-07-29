@@ -98,7 +98,7 @@ class Comment(models.Model):
 class Rating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     exhibition = models.ForeignKey(DataModel, on_delete=models.CASCADE, related_name='ratings')
-    rating = models.IntegerField(default=0)
+    rating = models.FloatField(default=0.0)
 
     class Meta:
         unique_together = ('user', 'exhibition')

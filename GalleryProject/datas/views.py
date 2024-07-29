@@ -50,9 +50,9 @@ class DataViewSet(ModelViewSet):
         user = request.user
         rating_value = request.data.get('rating')
 
-        if not rating_value or int(rating_value) < 1 or int(rating_value) > 5:
+        if not rating_value or not (0.5 <= float(rating_value) <= 5.0) or float(rating_value) % 0.5 != 0:
             return Response({'error': 'Invalid rating value'}, status=status.HTTP_400_BAD_REQUEST)
-
+        
         rating, created = Rating.objects.get_or_create(user=user, exhibition=exhibition)
         rating.rating = rating_value
         rating.save()
@@ -64,13 +64,17 @@ class DataViewSet(ModelViewSet):
     def get_ratings(self, request, pk=None):
         exhibition = self.get_object()
         average_rating = exhibition.ratings.aggregate(Avg('rating'))['rating__avg']
+        if average_rating is None:
+            average_rating = 0.0
+        else:
+            average_rating = round(average_rating, 1)
         rating_count = exhibition.ratings.aggregate(Count('id'))['id__count']
         ratings = exhibition.ratings.all()
         ratings_data = RatingSerializer(ratings, many=True).data
 
         return Response({
-            'average_rating': average_rating,
-            'rating_count': rating_count,
+            'averageRating': average_rating, 
+            'ratingCount': rating_count,
             'ratings': ratings_data
         })
 
