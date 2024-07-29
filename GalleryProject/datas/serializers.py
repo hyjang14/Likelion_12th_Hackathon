@@ -15,7 +15,11 @@ class DataSerializer(serializers.ModelSerializer):
             return obj.scrap_count()
         
         def get_average_rating(self, obj):
-            return obj.ratings.aggregate(Avg('rating'))['rating__avg'] or 0 
+            average = obj.ratings.aggregate(Avg('rating'))['rating__avg']
+
+            if average is None:
+                return 0.0  # 기본값 0.0
+            return round(average, 1)  # 소수점 첫째자리까지만
 
         def get_rating_count(self, obj):
             return obj.ratings.aggregate(Count('id'))['id__count'] or 0 
