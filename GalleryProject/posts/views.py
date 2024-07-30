@@ -114,8 +114,12 @@ class LikeDeleteView(generics.DestroyAPIView):
     
 
 class AnalysisListView(ListAPIView):
-    queryset = Analysis.objects.all()
     serializer_class = AnalysisSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Analysis.objects.filter(post__writer=user).order_by('-created_at')
 
 
 # AI 감정분석
