@@ -23,13 +23,15 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin1114/', admin.site.urls),
-    re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),
+
     # url(r'^$', TemplateView.as_view(template_name='index.html'),name='index'),
-    path('', include('accounts.urls')),
-    path('', include('datas.urls')),
-    path('', include('posts.urls')),
-    path('', include('books.urls')),
-    path('', include('musics.urls')),
+    path('api/', include('accounts.urls')),
+    path('api/', include('datas.urls')),
+    path('api/', include('posts.urls')),
+    path('api/', include('books.urls')),
+    path('api/', include('musics.urls')),
+
+    re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),
 ]
 
 # pillow

@@ -13,12 +13,14 @@ from musics.models import Music
 from books.models import Book
 from posts.models import Post
 from datas.models import DataModel, Comment
+from django.views.decorators.csrf import csrf_exempt
 
 
 # 로그인
+
 class CustomLoginView(LoginView):
     serializer_class = CustomLoginSerializer
-
+    @csrf_exempt
     def post(self, request, *args, **kwargs):
 
         serializer = self.get_serializer(data=request.data)

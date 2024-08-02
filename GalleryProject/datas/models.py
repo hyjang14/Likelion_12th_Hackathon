@@ -100,7 +100,7 @@ class Comment(models.Model):
 class Rating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     item = models.ForeignKey(DataModel, related_name='ratings', on_delete=models.CASCADE)
-    score = models.PositiveSmallIntegerField()  # 예: 1부터 5까지의 별점
+    score = models.FloatField(default=0.0)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

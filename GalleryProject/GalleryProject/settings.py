@@ -50,7 +50,7 @@ def get_secret(setting, secrets=secrets):
 SECRET_KEY = get_secret("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -123,7 +123,15 @@ CORS_ALLOW_METHODS = [
 	'POST',
 	'PUT',
 ]
-
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # 로컬 개발 서버 주소
+    "http://52.79.34.113",     # 배포 서버 주소
+    # 추가적으로 다른 도메인도 필요에 따라 추가할 수 있습니다.
+]
+CSRF_TRUSTED_ORIGINS = [
+    "https://yourdomain.com",
+    "http://localhost:3000",
+]
 # drf 인증 패키지 추가
 REST_FRAMEWORK = { 
 	'DEFAULT_AUTHENTICATION_CLASSES': [
