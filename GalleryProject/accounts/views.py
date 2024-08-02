@@ -14,7 +14,7 @@ from books.models import Book
 from posts.models import Post
 from datas.models import DataModel, Comment
 from django.views.decorators.csrf import csrf_exempt
-
+from rest_framework.views import APIView
 
 # 로그인
 
@@ -33,6 +33,11 @@ class CustomLoginView(LoginView):
             'usercode': serializer.validated_data['usercode']
         }, status=status.HTTP_200_OK)
 
+# 로그아웃
+class LogoutView(APIView):
+    def post(self, request, *args, **kwargs):
+        request.user.auth_token.delete()  # 현재 사용자 토큰 삭제
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 # 회원가입
 class UserViewSet(viewsets.ModelViewSet):
