@@ -16,7 +16,6 @@ djangorestframework-camel-case==1.4.2
 frozenlist==1.4.1
 idna==3.7
 multidict==6.0.5
-mysqlclient==2.2.4
 openai==0.28.0
 pillow==10.4.0
 PyMySQL==1.1.1
