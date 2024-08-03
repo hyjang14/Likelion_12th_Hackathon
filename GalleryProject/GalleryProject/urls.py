@@ -24,7 +24,6 @@ from django.views.static import serve
 urlpatterns = [
     path('admin1114/', admin.site.urls),
 
-    # url(r'^$', TemplateView.as_view(template_name='index.html'),name='index'),
     path('api/', include('accounts.urls')),
     path('api/', include('datas.urls')),
     path('api/', include('posts.urls')),
