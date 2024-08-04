@@ -1,4 +1,4 @@
-# Likelion_12th_Hackathon : Pathos(파토스)
+### Likelion_12th_Hackathon : Pathos(파토스)
 멋쟁이사자처럼 12기 중앙해커톤 - [팀명: Pathos(파토스)]
 
 ## 🦁 팀 소개 : Pathos(파토스) 🦁
