@@ -36,8 +36,8 @@
   |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
   |<img width="100%" src="https://github.com/user-attachments/assets/11c532a4-ea9a-4f1a-9049-db21bc8a0b3f"/>|<img width="100%" src="https://github.com/user-attachments/assets/023c2d0f-0489-4593-8aa1-04c98e0c1ffd"/>|<img width="100%" src="https://github.com/user-attachments/assets/6dd68578-d786-4650-adf3-c3b9cd88364f"/>|<img width="100%" src="https://github.com/user-attachments/assets/b1b57b8a-8b0b-4b5c-aaba-9b6e81508cb7"/>|<img width="100%" src="https://github.com/user-attachments/assets/80d2cc92-c0fa-4324-86a9-3068bbc013d4"/>|
   |<b>기획·디자인|<b>프론트엔드|<b>프론트엔드|<b>백엔드|<b>백엔드|
-  |서비스 기획·디자인|AI 심리분석 페이지 구현|서비스 디자인&계정·홈·전시·검색 페이지 구현|AI 심리분석 기능 구현|API 전시데이터 기능 구현|
-  |PPT 기획·디자인|후기글 커뮤니티 페이지 구현|백·프론트 연동|후기글 커뮤니티 기능 구현|정보&전시 커뮤니티 기능 구현|
+  |서비스 기획·디자인|AI 심리분석 페이지 구현|서비스 디자인&계정·홈·전시·검색 페이지 및 다크모드 구현|AI 심리분석 기능 구현|API 전시데이터 및 정보&전시 커뮤니티 기능 구현|
+  |PPT 기획·디자인|후기글 커뮤니티 페이지 구현|백·프론트 연동|후기글 커뮤니티 기능 구현|서비스 배포(AWS)|
 
 <br>
 
