@@ -94,7 +94,7 @@
  │  ├─ serializers.py
  │  └─ permissions.py
  ├─ client/
- │  ├─ static
+ │  ├─ static/
  │  ├─ asset-manifest.json
  │  └─ index.html
  └─ manage.py
