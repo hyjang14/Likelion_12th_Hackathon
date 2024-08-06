@@ -113,6 +113,8 @@ $ cd GalleryProject
 $ python manage.py runserver
 ```
 
+<br>
+
 ### 7. API 명세서
 https://www.notion.so/dwu-likelion12th-3/0868321dc85740eda4fc232322484b26?v=7514a7d85dcd45bea8df7018fdfe6750
 
