@@ -17,7 +17,7 @@ http://52.79.34.113/
 <br><br>
 ### 2. 서비스 소개
 <img width="100%" src="https://github.com/user-attachments/assets/acd4f811-8327-4c9d-93fd-faaf7224010c"/><br>
-<img width="100%" src="https://github.com/user-attachments/assets/76690296-be41-4530-a6da-77cdf14a104a"/>
+<img width="100%" src="https://github.com/user-attachments/assets/76690296-be41-4530-a6da-77cdf14a104a"/><br>
 <아트힐>은 정답이 없는 예술을 자유롭게 상상하고 해석함을 통해 마음의 평화를 찾고자 하는 생각에서 출발하였습니다. 작품을 감상하고, 바로 그 감정을 기록하며, 분석을 통해 자신의 감정 상태를 파악하고 데이터 내 맞춤 전시를 제안합니다.
 
 <b><아트힐>의 AI 감정 분석 기능을 통해 자신의 감정을 파악하고 솔루션을 제공받아 보세요!</b>
